@@ -8,18 +8,6 @@ It supports very big numbers with hundreds of digits, useful in an idle game. It
 
 For `4.1.x` and later, just drop the file in your project folder.
 
-For `3.x`, the easiest way to use this class is to preload it in a script that is set as [AutoLoad](https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html) in your project, as Big.gd cannot be used as AutoLoad itself as of Godot 3.3.4.
-
-e.g. In a file named Global.gd, autoloaded in your project:
-
-```GDScript
-extends Node
-
-const Big = preload("res://path/to/Big.gd")
-
-# ...
-```
-
 ## Creating an instance
 
 Multiple constructors can be used to instantiate a `Big` number:
