@@ -27,7 +27,7 @@ var unit_cost: Big = Big.new(2, 6)
 
 func cost(count: Big) -> Big:
     var _total = Big.new(count)
-    return _total.timesEquals(unit_cost)
+    return _total.times_equals(unit_cost)
 ```
 
 ## Mathematical operations
@@ -41,9 +41,9 @@ Instead, you can use the provided functions for a `Big` number:
 my_big_number.plus(value)       # my_big_number + value
 my_big_number.minus(value)      # my_big_number - value
 my_big_number.times(value)      # my_big_number * value
-my_big_number.dividedBy(value)  # my_big_number / value
+my_big_number.divided_by(value)  # my_big_number / value
 my_big_number.mod(value)        # my_big_number % value
-my_big_number.toThePowerOf(value) # Only accepts float or int; my_big_number ** value
+my_big_number.power_of(value) # Only accepts float or int; my_big_number ** value
 ```
 
 Or for calculating `Big` numbers together:
@@ -60,21 +60,21 @@ Operations can be chained:
 
 ```GDScript
 var my_big_number = Big.new(100)
-print(my_big_number.plus(10).dividedBy(10).toString())  # Will print "11"
+print(my_big_number.plus(10).divided_by(10).to_string())  # Will print "11"
 ```
 
 ## Modifying
 
-Some functions can modify the current object as well. It's as simple as writing "Equals" after the operation names
+Some functions can modify the current object as well. It's as simple as writing "equals" after the operation names
 
 ```GDScript
 # 'value' can be numeric or another Big number
-my_big_number.plusEquals(value)         # my_big_number += value
-my_big_number.minusEquals(value)        # my_big_number -= value
-my_big_number.timesEquals(value)        # my_big_number *= value
-my_big_number.dividedByEquals(value)    # my_big_number /= value
-my_big_number.modEquals(value)          # my_big_number %= value
-my_big_number.toThePowerOfEquals(value) # Only accepts float or int; my_big_number **= value
+my_big_number.plus_equals(value)         # my_big_number += value
+my_big_number.minus_equals(value)        # my_big_number -= value
+my_big_number.times_equals(value)        # my_big_number *= value
+my_big_number.divided_by_equals(value)    # my_big_number /= value
+my_big_number.mod_equals(value)          # my_big_number %= value
+my_big_number.power_of_equals(value) # Only accepts float or int; my_big_number **= value
 
 Big.round_down(my_big_number)           # Rounds down the mantissa
 ```
@@ -88,11 +88,11 @@ Instead, you can use the provided functions:
 ```GDScript
 # 'value' can be numeric or another Big number
 
-my_big_number.isGreaterThan(value)
-my_big_number.isGreaterThanOrEqualTo(value)
-my_big_number.isEqualTo(value)
-my_big_number.isLessThanOrEqualTo(value)
-my_big_number.isLessThan(value)
+my_big_number.is_greater_than(value)
+my_big_number.is_greater_or_equal_to(value)
+my_big_number.is_equal_to(value)
+my_big_number.is_less_or_equal_to(value)
+my_big_number.is_less_than(value)
 ```
 
 ## Static functions
@@ -103,8 +103,8 @@ The following static functions are available:
 # 'big_value' must be a Big number;
 # 'value' can be numeric or another Big number
 
-var smallest = Big.minValue(big_value, value)
-var largest = Big.maxValue(big_value, value)
+var smallest = Big.min_value(big_value, value)
+var largest = Big.max_value(big_value, value)
 var positive = Big.absolute(big_value)
 ```
 
@@ -114,46 +114,44 @@ An important aspect with big numbers is being able to display them in a way that
 
 ```GDScript
 var big = Big.new(12345, 12)
-print(big.toAA())               # 12.34aa
-print(big.toAmericanName())     # 12.34quadrillion
-print(big.toEuropeanName())     # 12.34billiard
-print(big.toLongName())         # 12.34quadrillion
-print(big.toMetricName())       # 12.34peta
-print(big.toMetricSymbol())     # 12.34P
-print(big.toPrefix())           # 12.34
-print(big.toScientific())       # 1.2345e16
-print(big.toShortScientific())  # 1.2e16
-print(big.toString())           # 12345000000000000
+print(big.to_aa())               # 12.34aa
+print(big.to_american_name())     # 12.34quadrillion
+print(big.to_european_name())     # 12.34billiard print(big.to_long_name())         # 12.34quadrillion
+print(big.to_metric_name())       # 12.34peta
+print(big.to_metric_name())       # 12.34peta
+print(big.to_prefix())           # 12.34
+print(big.to_scientific())       # 1.2345e16
+print(big.to_short_scientific())  # 1.2e16
+print(big.to_string())           # 12345000000000000
 ```
-
 Some of the functions have arguments with default values, not displayed in the snippet above.
 
 You can tweak the way the strings are formatted by calling the following static functions:
 
 ```GDScript
-Big.setThousandName("string_value")       # Defaults to "thousand"
-Big.setThousandSeparator("string_value")  # Defaults to ".", you should set this with your localization settings
-Big.setDecimalSeparator("string_value")   # Defaults to ",", you should set this with your localization settings
-Big.setSuffixSeparator("string_value")   # Defaults to an empty string
-Big.setReadingSeparator("string_value")   # Defaults to an empty string
+Big.set_thousand_name("string_value")       # Defaults to "thousand"
+Big.set_thousand_separator("string_value")  # Defaults to ".", you should set this with your localization settings
+Big.set_decimal_separator("string_value")   # Defaults to ",", you should set this with your localization settings
+Big.set_suffix_separator("string_value")   # Defaults to an empty string
+Big.set_reading_separator("string_value")   # Defaults to an empty string
 
-Big.setDynamicNumbers(int_value)  # Defaults to 4, makes it such that values will only have four digits when dynamic_decimals is true, ie. 1,234 or 12,34
-Big.setDynamicDecimals(bool_value)  # Defaults to true
+Big.set_dynamic_numbers(int_value)  # Defaults to 4, makes it such that values will only have four digits when dynamic_decimals is true, ie. 1,234 or 12,34
+Big.set_dynamic_decimals(bool_value)  # Defaults to true
 
-Big.setSmallDecimals(int_value)     # Defaults to 2
-Big.setThousandDecimals(int_value)  # Defaults to 2
-Big.setBigDecimals(int_value)       # Defaults to 2
+Big.set_small_decimals(int_value)     # Defaults to 2
+Big.set_thousand_decimals(int_value)  # Defaults to 2
+Big.set_big_decimals(int_value)       # Defaults to 2
 ```
 
 For example:
 
 ```GDScript
 var big = Big.new(12345, 12)
-print(big.toAA())  # With default settings: 12,34aa
+print(big.to_aa())  # With default settings: 12,34aa
 
-Big.setSuffixSeparator(" ")
-Big.setDecimalSeparator(".")
-Big.setDynamicDecimals(false)
-Big.setSmallDecimals(1)
-print(big.toAA())  # With modified settings: 12.3 aa
+Big.set_suffix_separator(" ")
+Big.set_decimal_separator(".")
+Big.set_dynamic_decimals(false)
+Big.set_small_decimals(1)
+print(big.to_aa())  # With modified settings: 12.3 aa
 ```
