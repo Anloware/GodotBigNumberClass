@@ -122,31 +122,32 @@ enum StringFormat { PLAIN,            # 0
                     LONG_US,          # 6
                     LONG_EU }         # 7
 
+
 var big = Big.new(12345, 12)
 
 Big.set_string_format(0)
-print(big.to_string())            # 12345000000000000
+print(big.to_string())    # 12345000000000000
 
 Big.set_string_format(1)
-print(big.to_metric_symbol())     # 12.34p
+print(big.to_string())    # 12.34p
 
 Big.set_string_format(2)
-print(big.to_metric_name())       # 12.34peta
+print(big.to_string())    # 12.34peta
 
 Big.set_string_format(3)
-print(big.to_scientific())        # 1.2345e16
+print(big.to_string())    # 1.2345e16
 
 Big.set_string_format(4)
-print(big.to_short_scientific())  # 1.2e16
+print(big.to_string())    # 1.2e16
 
 Big.set_string_format(5)
-print(big.to_aa())                # 12.34aa
+print(big.to_string())    # 12.34aa
 
 Big.set_string_format(6)
-print(big.to_american_name())     # 12.34quadrillion
+print(big.to_string())    # 12.34quadrillion
 
 Big.set_string_format(7)
-print(big.to_european_name())     # 12.34billiard
+print(big.to_string())    # 12.34billiard
 ```
 Some of the functions have arguments with default values, not displayed in the snippet above.
 
