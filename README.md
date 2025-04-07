@@ -1,4 +1,4 @@
-# GodotBigNumberClass
+# Godot Big Number
 
 Use very BIG numbers in Godot Engine games.
 
@@ -38,12 +38,12 @@ Instead, you can use the provided functions for a `Big` number:
 
 ```GDScript
 # 'value' can be numeric or another Big number
-my_big_number.plus(value)       # my_big_number + value
-my_big_number.minus(value)      # my_big_number - value
-my_big_number.times(value)      # my_big_number * value
+my_big_number.plus(value)        # my_big_number + value
+my_big_number.minus(value)       # my_big_number - value
+my_big_number.times(value)       # my_big_number * value
 my_big_number.divided_by(value)  # my_big_number / value
-my_big_number.mod(value)        # my_big_number % value
-my_big_number.power_of(value) # Only accepts float or int; my_big_number ** value
+my_big_number.mod(value)         # my_big_number % value
+my_big_number.power_of(value)    # Only accepts float or int; my_big_number ** value
 ```
 
 Or for calculating `Big` numbers together:
@@ -72,7 +72,7 @@ Some functions can modify the current object as well. It's as simple as writing 
 my_big_number.plus_equals(value)         # my_big_number += value
 my_big_number.minus_equals(value)        # my_big_number -= value
 my_big_number.times_equals(value)        # my_big_number *= value
-my_big_number.divided_by_equals(value)    # my_big_number /= value
+my_big_number.divided_by_equals(value)   # my_big_number /= value
 my_big_number.mod_equals(value)          # my_big_number %= value
 my_big_number.power_of_equals(value) # Only accepts float or int; my_big_number **= value
 
@@ -113,16 +113,40 @@ var positive = Big.absolute(big_value)
 An important aspect with big numbers is being able to display them in a way that is readable and makes sense for the player. The following functions can be used to do so:
 
 ```GDScript
+enum StringFormat { PLAIN,            # 0
+                    METRIC_SHORT,     # 1
+                    METRIC_LONG,      # 2
+                    SCIENTIFIC,       # 3
+                    SCIENTIFIC_PLAIN, # 4
+                    AA,               # 5
+                    LONG_US,          # 6
+                    LONG_EU }         # 7
+
 var big = Big.new(12345, 12)
-print(big.to_aa())               # 12.34aa
-print(big.to_american_name())     # 12.34quadrillion
-print(big.to_european_name())     # 12.34billiard print(big.to_long_name())         # 12.34quadrillion
+
+Big.set_string_format(0)
+print(big.to_string())            # 12345000000000000
+
+Big.set_string_format(1)
+print(big.to_metric_symbol())     # 12.34p
+
+Big.set_string_format(2)
 print(big.to_metric_name())       # 12.34peta
-print(big.to_metric_name())       # 12.34peta
-print(big.to_prefix())           # 12.34
-print(big.to_scientific())       # 1.2345e16
+
+Big.set_string_format(3)
+print(big.to_scientific())        # 1.2345e16
+
+Big.set_string_format(4)
 print(big.to_short_scientific())  # 1.2e16
-print(big.to_string())           # 12345000000000000
+
+Big.set_string_format(5)
+print(big.to_aa())                # 12.34aa
+
+Big.set_string_format(6)
+print(big.to_american_name())     # 12.34quadrillion
+
+Big.set_string_format(7)
+print(big.to_european_name())     # 12.34billiard
 ```
 Some of the functions have arguments with default values, not displayed in the snippet above.
 
@@ -132,10 +156,10 @@ You can tweak the way the strings are formatted by calling the following static 
 Big.set_thousand_name("string_value")       # Defaults to "thousand"
 Big.set_thousand_separator("string_value")  # Defaults to ".", you should set this with your localization settings
 Big.set_decimal_separator("string_value")   # Defaults to ",", you should set this with your localization settings
-Big.set_suffix_separator("string_value")   # Defaults to an empty string
+Big.set_suffix_separator("string_value")    # Defaults to an empty string
 Big.set_reading_separator("string_value")   # Defaults to an empty string
 
-Big.set_dynamic_numbers(int_value)  # Defaults to 4, makes it such that values will only have four digits when dynamic_decimals is true, ie. 1,234 or 12,34
+Big.set_dynamic_numbers(int_value)    # Defaults to 4, makes it such that values will only have four digits when dynamic_decimals is true, ie. 1,234 or 12,34
 Big.set_dynamic_decimals(bool_value)  # Defaults to true
 
 Big.set_small_decimals(int_value)     # Defaults to 2
